@@ -1,26 +1,24 @@
 #include "TransportingState.h"
+#include "EmergencyUnit.h"
+#include "DoneState.h"
 
-TransportingState* TransportingState::static_getInstance() {
-	// TODO - implement TransportingState::static getInstance
-	throw "Not yet implemented";
+TransportingState* TransportingState::instance = nullptr;
+
+TransportingState* TransportingState::getInstance() {
+	if (instance == nullptr) {
+		instance = new TransportingState();
+	}
+	return instance;
 }
 
 string TransportingState::getStateName() {
-	// TODO - implement TransportingState::getStateName
-	throw "Not yet implemented";
+	return "Transporting";
 }
 
 bool TransportingState::isAvailable() {
-	// TODO - implement TransportingState::isAvailable
-	throw "Not yet implemented";
+	return false;
 }
 
 void TransportingState::advance(EmergencyUnit* u) {
-	// TODO - implement TransportingState::advance
-	throw "Not yet implemented";
-}
-
-void TransportingState::cancel(EmergencyUnit* u) {
-	// TODO - implement TransportingState::cancel
-	throw "Not yet implemented";
+	u->setState(DoneState::getInstance());
 }

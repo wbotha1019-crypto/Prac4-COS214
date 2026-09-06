@@ -1,21 +1,21 @@
 #ifndef ONSCENESTATE_H
 #define ONSCENESTATE_H
 #include "UnitState.h"
-#include "EmergencyUnit.h"
+#include <string>
+using namespace std;
 
-class OnSceneState : UnitState {
+class EmergencyUnit;
 
-
+class OnSceneState : public UnitState {
+private:
+	static OnSceneState* instance;
+	OnSceneState() {}
+	OnSceneState(const OnSceneState&) = delete;
+	OnSceneState& operator=(const OnSceneState&) = delete;
 public:
-	OnSceneState* static_getInstance();
-
+	static OnSceneState* getInstance();
 	string getStateName();
-
 	bool isAvailable();
-
 	void advance(EmergencyUnit* u);
-
-	void cancel(EmergencyUnit* u);
 };
-
 #endif

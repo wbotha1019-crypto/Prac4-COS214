@@ -1,17 +1,17 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
-#include "EmergencyComponent.h"
-#include <string>
-#include <iostream>
-using namespace std;
+
+// FIX: only pointers to EmergencyComponent are used here, so we forward-declare
+// instead of #include "EmergencyComponent.h". The original generated stub fully
+// included it, which (once EmergencyComponent.h is made to implement Aggregrate)
+// creates a circular #include chain: EmergencyComponent.h -> Aggregrate.h ->
+// EmergencyIterator.h -> Iterator.h -> EmergencyComponent.h.
+class EmergencyComponent;
 
 class Iterator {
-
-
 public:
 	virtual bool hasNext() = 0;
-
 	virtual EmergencyComponent* next() = 0;
+	virtual ~Iterator() {}
 };
-
 #endif

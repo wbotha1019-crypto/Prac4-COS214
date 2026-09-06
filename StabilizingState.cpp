@@ -1,26 +1,24 @@
 #include "StabilizingState.h"
+#include "EmergencyUnit.h"
+#include "TransportingState.h"
 
-StabilizingState* StabilizingState::static_getInstance() {
-	// TODO - implement StabilizingState::static getInstance
-	throw "Not yet implemented";
+StabilizingState* StabilizingState::instance = nullptr;
+
+StabilizingState* StabilizingState::getInstance() {
+	if (instance == nullptr) {
+		instance = new StabilizingState();
+	}
+	return instance;
 }
 
 string StabilizingState::getStateName() {
-	// TODO - implement StabilizingState::getStateName
-	throw "Not yet implemented";
+	return "Stabilizing";
 }
 
 bool StabilizingState::isAvailable() {
-	// TODO - implement StabilizingState::isAvailable
-	throw "Not yet implemented";
+	return false;
 }
 
 void StabilizingState::advance(EmergencyUnit* u) {
-	// TODO - implement StabilizingState::advance
-	throw "Not yet implemented";
-}
-
-void StabilizingState::cancel(EmergencyUnit* u) {
-	// TODO - implement StabilizingState::cancel
-	throw "Not yet implemented";
+	u->setState(TransportingState::getInstance());
 }

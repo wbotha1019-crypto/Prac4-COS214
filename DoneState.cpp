@@ -1,26 +1,27 @@
 #include "DoneState.h"
+#include "EmergencyUnit.h"
+#include <iostream>
+using namespace std;
 
-DoneState* DoneState::static_getInstance() {
-	// TODO - implement DoneState::static getInstance
-	throw "Not yet implemented";
+DoneState* DoneState::instance = nullptr;
+
+DoneState* DoneState::getInstance() {
+	if (instance == nullptr) {
+		instance = new DoneState();
+	}
+	return instance;
 }
 
 string DoneState::getStateName() {
-	// TODO - implement DoneState::getStateName
-	throw "Not yet implemented";
+	return "Done";
 }
 
 bool DoneState::isAvailable() {
-	// TODO - implement DoneState::isAvailable
-	throw "Not yet implemented";
+	// A unit that has finished its mission is free to be dispatched again.
+	return true;
 }
 
 void DoneState::advance(EmergencyUnit* u) {
-	// TODO - implement DoneState::advance
-	throw "Not yet implemented";
-}
-
-void DoneState::cancel(EmergencyUnit* u) {
-	// TODO - implement DoneState::cancel
-	throw "Not yet implemented";
+	// Invalid transition, handled sensibly: there is nothing after Done.
+	cout << "[Invalid] " << u->getUnitID() << " is already Done; cannot advance further." << endl;
 }

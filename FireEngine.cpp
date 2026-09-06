@@ -1,31 +1,31 @@
 #include "FireEngine.h"
+#include <iostream>
+using namespace std;
 
-FireEngine::FireEngine(string name, int capacity, int waterCapacity) {
-	// TODO - implement FireEngine::FireEngine
-	throw "Not yet implemented";
+FireEngine::FireEngine(string name, int capacity, int waterCapacity)
+	: EmergencyUnit(name, "FireEngine", capacity),
+	  waterCapacity(waterCapacity),
+	  foamLevel(100) {
 }
 
 void FireEngine::performAction() {
-	// TODO - implement FireEngine::performAction
-	throw "Not yet implemented";
+	deployHose();
+	extinguish();
 }
 
 void FireEngine::extinguish() {
-	// TODO - implement FireEngine::extinguish
-	throw "Not yet implemented";
+	if (foamLevel > 0) foamLevel -= 10;
+	cout << unitID << " extinguishing fire (foam level now " << foamLevel << ")" << endl;
 }
 
 void FireEngine::deployHose() {
-	// TODO - implement FireEngine::deployHose
-	throw "Not yet implemented";
+	cout << unitID << " deploying hose (water capacity " << waterCapacity << "L)" << endl;
 }
 
 int FireEngine::getWaterCapacity() {
-	// TODO - implement FireEngine::getWaterCapacity
-	throw "Not yet implemented";
+	return waterCapacity;
 }
 
 int FireEngine::getFoamLevel() {
-	// TODO - implement FireEngine::getFoamLevel
-	throw "Not yet implemented";
+	return foamLevel;
 }

@@ -3,7 +3,8 @@
 #include "EmergencyIterator.h"
 #include "EmergencyComponent.h"
 
-class AvailableUnitsIterator : EmergencyIterator {
+// FIX: private -> public inheritance (see AllUnitsIterator.h for why).
+class AvailableUnitsIterator : public EmergencyIterator {
 
 
 public:

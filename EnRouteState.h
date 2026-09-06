@@ -1,21 +1,21 @@
 #ifndef ENROUTESTATE_H
 #define ENROUTESTATE_H
 #include "UnitState.h"
-#include "EmergencyUnit.h"
+#include <string>
+using namespace std;
 
-class EnRouteState : UnitState {
+class EmergencyUnit;
 
-
+class EnRouteState : public UnitState {
+private:
+	static EnRouteState* instance;
+	EnRouteState() {}
+	EnRouteState(const EnRouteState&) = delete;
+	EnRouteState& operator=(const EnRouteState&) = delete;
 public:
-	EnRouteState* static_getInstance();
-
+	static EnRouteState* getInstance();
 	string getStateName();
-
 	bool isAvailable();
-
 	void advance(EmergencyUnit* u);
-
-	void cancel(EmergencyUnit* u);
 };
-
 #endif

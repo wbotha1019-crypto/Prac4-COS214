@@ -1,26 +1,24 @@
 #include "EnRouteState.h"
+#include "EmergencyUnit.h"
+#include "OnSceneState.h"
 
-EnRouteState* EnRouteState::static_getInstance() {
-	// TODO - implement EnRouteState::static getInstance
-	throw "Not yet implemented";
+EnRouteState* EnRouteState::instance = nullptr;
+
+EnRouteState* EnRouteState::getInstance() {
+	if (instance == nullptr) {
+		instance = new EnRouteState();
+	}
+	return instance;
 }
 
 string EnRouteState::getStateName() {
-	// TODO - implement EnRouteState::getStateName
-	throw "Not yet implemented";
+	return "En Route";
 }
 
 bool EnRouteState::isAvailable() {
-	// TODO - implement EnRouteState::isAvailable
-	throw "Not yet implemented";
+	return false;
 }
 
 void EnRouteState::advance(EmergencyUnit* u) {
-	// TODO - implement EnRouteState::advance
-	throw "Not yet implemented";
-}
-
-void EnRouteState::cancel(EmergencyUnit* u) {
-	// TODO - implement EnRouteState::cancel
-	throw "Not yet implemented";
+	u->setState(OnSceneState::getInstance());
 }

@@ -1,31 +1,31 @@
 #include "Ambulance.h"
+#include <iostream>
+using namespace std;
 
-Ambulance::Ambulance(string name, int capacity, int patientCapacity) {
-	// TODO - implement Ambulance::Ambulance
-	throw "Not yet implemented";
+Ambulance::Ambulance(string name, int capacity, int patientCapacity)
+	: EmergencyUnit(name, "Ambulance", capacity),
+	  patientCapacity(patientCapacity),
+	  medicalSupplies(100) {
 }
 
 void Ambulance::performAction() {
-	// TODO - implement Ambulance::performAction
-	throw "Not yet implemented";
+	treatPatient();
+	transportPatient();
 }
 
 void Ambulance::transportPatient() {
-	// TODO - implement Ambulance::transportPatient
-	throw "Not yet implemented";
+	cout << unitID << " transporting patient (capacity " << patientCapacity << ")" << endl;
 }
 
 void Ambulance::treatPatient() {
-	// TODO - implement Ambulance::treatPatient
-	throw "Not yet implemented";
+	if (medicalSupplies >= 10) medicalSupplies -= 10;
+	cout << unitID << " treating patient (supplies left " << medicalSupplies << ")" << endl;
 }
 
 int Ambulance::getPatientCapacity() {
-	// TODO - implement Ambulance::getPatientCapacity
-	throw "Not yet implemented";
+	return patientCapacity;
 }
 
 int Ambulance::getMedicalSupplies() {
-	// TODO - implement Ambulance::getMedicalSupplies
-	throw "Not yet implemented";
+	return medicalSupplies;
 }

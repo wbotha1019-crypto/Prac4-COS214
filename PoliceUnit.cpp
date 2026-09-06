@@ -1,31 +1,30 @@
 #include "PoliceUnit.h"
+#include <iostream>
+using namespace std;
 
-PoliceUnit::PoliceUnit(string name, int capacity, int officerCount) {
-	// TODO - implement PoliceUnit::PoliceUnit
-	throw "Not yet implemented";
+PoliceUnit::PoliceUnit(string name, int capacity, int officerCount)
+	: EmergencyUnit(name, "PoliceUnit", capacity),
+	  officerCount(officerCount),
+	  hasK9Unit(false) {
 }
 
 void PoliceUnit::performAction() {
-	// TODO - implement PoliceUnit::performAction
-	throw "Not yet implemented";
+	securePerimeter();
+	directTraffic();
 }
 
 void PoliceUnit::securePerimeter() {
-	// TODO - implement PoliceUnit::securePerimeter
-	throw "Not yet implemented";
+	cout << unitID << " securing perimeter with " << officerCount << " officers" << endl;
 }
 
 void PoliceUnit::directTraffic() {
-	// TODO - implement PoliceUnit::directTraffic
-	throw "Not yet implemented";
+	cout << unitID << " directing traffic" << endl;
 }
 
 int PoliceUnit::getOfficerCount() {
-	// TODO - implement PoliceUnit::getOfficerCount
-	throw "Not yet implemented";
+	return officerCount;
 }
 
 bool PoliceUnit::hasK9() {
-	// TODO - implement PoliceUnit::hasK9
-	throw "Not yet implemented";
+	return hasK9Unit;
 }

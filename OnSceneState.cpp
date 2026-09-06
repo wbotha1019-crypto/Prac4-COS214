@@ -1,26 +1,24 @@
 #include "OnSceneState.h"
+#include "EmergencyUnit.h"
+#include "StabilizingState.h"
 
-OnSceneState* OnSceneState::static_getInstance() {
-	// TODO - implement OnSceneState::static getInstance
-	throw "Not yet implemented";
+OnSceneState* OnSceneState::instance = nullptr;
+
+OnSceneState* OnSceneState::getInstance() {
+	if (instance == nullptr) {
+		instance = new OnSceneState();
+	}
+	return instance;
 }
 
 string OnSceneState::getStateName() {
-	// TODO - implement OnSceneState::getStateName
-	throw "Not yet implemented";
+	return "On Scene";
 }
 
 bool OnSceneState::isAvailable() {
-	// TODO - implement OnSceneState::isAvailable
-	throw "Not yet implemented";
+	return false;
 }
 
 void OnSceneState::advance(EmergencyUnit* u) {
-	// TODO - implement OnSceneState::advance
-	throw "Not yet implemented";
-}
-
-void OnSceneState::cancel(EmergencyUnit* u) {
-	// TODO - implement OnSceneState::cancel
-	throw "Not yet implemented";
+	u->setState(StabilizingState::getInstance());
 }
