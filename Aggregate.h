@@ -1,5 +1,5 @@
-#ifndef AGGREGRATE_H
-#define AGGREGRATE_H
+#ifndef AGGREGATE_H
+#define AGGREGATE_H
 
 #include <string>
 using namespace std;
@@ -8,7 +8,7 @@ using namespace std;
 // are used) -- breaks the circular include with EmergencyComponent.h.
 class EmergencyIterator;
 
-class Aggregrate {
+class Aggregate {
 public:
 	virtual EmergencyIterator* createAllIterator() = 0;
 	virtual EmergencyIterator* createAvailableIterator() = 0;
@@ -17,6 +17,6 @@ public:
 	// them. Added the third so EmergencyComponent's declaration is a genuine
 	// override of the interface, not just a lookalike.
 	virtual EmergencyIterator* createTypeFilterIterator(string unitType) = 0;
-	virtual ~Aggregrate() {}
+	virtual ~Aggregate() {}
 };
 #endif
