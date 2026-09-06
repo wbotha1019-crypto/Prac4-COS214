@@ -1,41 +1,36 @@
 #include "TechnicalRescueDecorator.h"
+#include <iostream>
+using namespace std;
 
-TechnicalRescueDecorator::TechnicalRescueDecorator(EmergencyComponent* c) {
-	// TODO - implement TechnicalRescueDecorator::TechnicalRescueDecorator
-	throw "Not yet implemented";
+TechnicalRescueDecorator::TechnicalRescueDecorator(EmergencyComponent* c)
+	: UnitDecorator(c), equipmentList("hydraulic spreaders, rope kit") {
 }
 
 void TechnicalRescueDecorator::execute() {
-	// TODO - implement TechnicalRescueDecorator::execute
-	throw "Not yet implemented";
+	UnitDecorator::execute();
+	extrication();
 }
 
 string TechnicalRescueDecorator::getStatus() {
-	// TODO - implement TechnicalRescueDecorator::getStatus
-	throw "Not yet implemented";
+	return UnitDecorator::getStatus() + " +TechRescue[" + equipmentList + "]";
 }
 
 void TechnicalRescueDecorator::ropeRescue() {
-	// TODO - implement TechnicalRescueDecorator::ropeRescue
-	throw "Not yet implemented";
+	cout << "  (TechRescue) performing rope rescue" << endl;
 }
 
 void TechnicalRescueDecorator::confinedSpace() {
-	// TODO - implement TechnicalRescueDecorator::confinedSpace
-	throw "Not yet implemented";
+	cout << "  (TechRescue) entering confined space" << endl;
 }
 
 void TechnicalRescueDecorator::extrication() {
-	// TODO - implement TechnicalRescueDecorator::extrication
-	throw "Not yet implemented";
+	cout << "  (TechRescue) heavy extrication using " << equipmentList << endl;
 }
 
 void TechnicalRescueDecorator::heavyLifting() {
-	// TODO - implement TechnicalRescueDecorator::heavyLifting
-	throw "Not yet implemented";
+	cout << "  (TechRescue) heavy lifting operation" << endl;
 }
 
 string TechnicalRescueDecorator::getEquipment() {
-	// TODO - implement TechnicalRescueDecorator::getEquipment
-	throw "Not yet implemented";
+	return equipmentList;
 }

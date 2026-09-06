@@ -1,36 +1,32 @@
 #include "AerialDecorator.h"
+#include <iostream>
+using namespace std;
 
-AerialDecorator::AerialDecorator(EmergencyComponent* c) {
-	// TODO - implement AerialDecorator::AerialDecorator
-	throw "Not yet implemented";
+AerialDecorator::AerialDecorator(EmergencyComponent* c)
+	: UnitDecorator(c), droneModel("DJI-Matrice"), flightTime(30) {
 }
 
 void AerialDecorator::execute() {
-	// TODO - implement AerialDecorator::execute
-	throw "Not yet implemented";
+	UnitDecorator::execute();
+	aerialReconnaissance();
 }
 
 string AerialDecorator::getStatus() {
-	// TODO - implement AerialDecorator::getStatus
-	throw "Not yet implemented";
+	return UnitDecorator::getStatus() + " +Aerial[" + droneModel + "]";
 }
 
 void AerialDecorator::aerialReconnaissance() {
-	// TODO - implement AerialDecorator::aerialReconnaissance
-	throw "Not yet implemented";
+	cout << "  (Drone " << droneModel << ") conducting aerial reconnaissance" << endl;
 }
 
 void AerialDecorator::droneSupport() {
-	// TODO - implement AerialDecorator::droneSupport
-	throw "Not yet implemented";
+	cout << "  (Drone " << droneModel << ") providing overhead support" << endl;
 }
 
 void AerialDecorator::thermalImaging() {
-	// TODO - implement AerialDecorator::thermalImaging
-	throw "Not yet implemented";
+	cout << "  (Drone " << droneModel << ") scanning with thermal imaging" << endl;
 }
 
 string AerialDecorator::getDroneInfo() {
-	// TODO - implement AerialDecorator::getDroneInfo
-	throw "Not yet implemented";
+	return droneModel + " (" + std::to_string(flightTime) + " min flight time)";
 }

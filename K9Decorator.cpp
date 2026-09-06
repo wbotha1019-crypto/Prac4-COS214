@@ -1,36 +1,37 @@
 #include "K9Decorator.h"
+#include <iostream>
+using namespace std;
 
-K9Decorator::K9Decorator(EmergencyComponent* c) {
-	// TODO - implement K9Decorator::K9Decorator
-	throw "Not yet implemented";
+K9Decorator::K9Decorator(EmergencyComponent* c)
+	: UnitDecorator(c), dogBreed("German Shepherd"), dogName("Rex") {
 }
 
 void K9Decorator::execute() {
-	// TODO - implement K9Decorator::execute
-	throw "Not yet implemented";
+	// "Delegates + adds own behaviour": call the decorator chain underneath
+	// first, then layer this decorator's extra capability on top. Because this
+	// calls UnitDecorator::execute() (not wrapped->execute() directly), a
+	// stack like K9Decorator -> AerialDecorator -> Ambulance still runs every
+	// layer in order.
+	UnitDecorator::execute();
+	searchAndRescue();
 }
 
 string K9Decorator::getStatus() {
-	// TODO - implement K9Decorator::getStatus
-	throw "Not yet implemented";
+	return UnitDecorator::getStatus() + " +K9[" + dogName + "/" + dogBreed + "]";
 }
 
 void K9Decorator::searchAndRescue() {
-	// TODO - implement K9Decorator::searchAndRescue
-	throw "Not yet implemented";
+	cout << "  (K9 " << dogName << ") searching for survivors" << endl;
 }
 
 void K9Decorator::tracking() {
-	// TODO - implement K9Decorator::tracking
-	throw "Not yet implemented";
+	cout << "  (K9 " << dogName << ") tracking scent trail" << endl;
 }
 
 void K9Decorator::detectSubstances() {
-	// TODO - implement K9Decorator::detectSubstances
-	throw "Not yet implemented";
+	cout << "  (K9 " << dogName << ") detecting hazardous substances" << endl;
 }
 
 string K9Decorator::getDogInfo() {
-	// TODO - implement K9Decorator::getDogInfo
-	throw "Not yet implemented";
+	return dogName + " (" + dogBreed + ")";
 }
