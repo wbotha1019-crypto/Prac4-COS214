@@ -1,0 +1,7 @@
+*.o
+taskforge
+.git
+docs/
+*.vpp
+*.jpg
+*.pdf
