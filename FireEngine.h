@@ -2,27 +2,20 @@
 #define FIREENGINE_H
 #include "EmergencyUnit.h"
 #include <string>
-#include <iostream>
 using namespace std;
 
-class FireEngine : EmergencyUnit {
-
+// FIX: was "class FireEngine : EmergencyUnit" (private) -> public, same reason
+// as EmergencyUnit itself (needed for polymorphic storage/use everywhere).
+class FireEngine : public EmergencyUnit {
 private:
 	int waterCapacity;
 	int foamLevel;
-
 public:
 	FireEngine(string name, int capacity, int waterCapacity);
-
 	void performAction();
-
 	void extinguish();
-
 	void deployHose();
-
 	int getWaterCapacity();
-
 	int getFoamLevel();
 };
-
 #endif

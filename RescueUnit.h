@@ -5,7 +5,8 @@
 #include <iostream>
 using namespace std;
 
-class RescueUnit : EmergencyUnit {
+// FIX: private -> public inheritance (see FireEngine.h).
+class RescueUnit : public EmergencyUnit {
 
 private:
 	int ropeLength;
