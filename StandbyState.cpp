@@ -1,26 +1,24 @@
 #include "StandbyState.h"
+#include "EmergencyUnit.h"
+#include "EnRouteState.h"
 
-StandbyState* StandbyState::static_getInstance() {
-	// TODO - implement StandbyState::static getInstance
-	throw "Not yet implemented";
+StandbyState* StandbyState::instance = nullptr;
+
+StandbyState* StandbyState::getInstance() {
+	if (instance == nullptr) {
+		instance = new StandbyState();
+	}
+	return instance;
 }
 
 string StandbyState::getStateName() {
-	// TODO - implement StandbyState::getStateName
-	throw "Not yet implemented";
+	return "Standby";
 }
 
 bool StandbyState::isAvailable() {
-	// TODO - implement StandbyState::isAvailable
-	throw "Not yet implemented";
+	return true;
 }
 
 void StandbyState::advance(EmergencyUnit* u) {
-	// TODO - implement StandbyState::advance
-	throw "Not yet implemented";
-}
-
-void StandbyState::cancel(EmergencyUnit* u) {
-	// TODO - implement StandbyState::cancel
-	throw "Not yet implemented";
+	u->setState(EnRouteState::getInstance());
 }

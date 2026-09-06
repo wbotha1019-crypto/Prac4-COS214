@@ -1,21 +1,21 @@
 #ifndef STABILIZINGSTATE_H
 #define STABILIZINGSTATE_H
 #include "UnitState.h"
-#include "EmergencyUnit.h"
+#include <string>
+using namespace std;
 
-class StabilizingState : UnitState {
+class EmergencyUnit;
 
-
+class StabilizingState : public UnitState {
+private:
+	static StabilizingState* instance;
+	StabilizingState() {}
+	StabilizingState(const StabilizingState&) = delete;
+	StabilizingState& operator=(const StabilizingState&) = delete;
 public:
-	StabilizingState* static_getInstance();
-
+	static StabilizingState* getInstance();
 	string getStateName();
-
 	bool isAvailable();
-
 	void advance(EmergencyUnit* u);
-
-	void cancel(EmergencyUnit* u);
 };
-
 #endif

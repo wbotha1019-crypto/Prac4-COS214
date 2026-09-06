@@ -1,21 +1,21 @@
 #ifndef DONESTATE_H
 #define DONESTATE_H
 #include "UnitState.h"
-#include "EmergencyUnit.h"
+#include <string>
+using namespace std;
 
-class DoneState : UnitState {
+class EmergencyUnit;
 
-
+class DoneState : public UnitState {
+private:
+	static DoneState* instance;
+	DoneState() {}
+	DoneState(const DoneState&) = delete;
+	DoneState& operator=(const DoneState&) = delete;
 public:
-	DoneState* static_getInstance();
-
+	static DoneState* getInstance();
 	string getStateName();
-
 	bool isAvailable();
-
 	void advance(EmergencyUnit* u);
-
-	void cancel(EmergencyUnit* u);
 };
-
 #endif
