@@ -60,11 +60,26 @@ void EmergencyGroup::cancel() {
 	}
 }
 
-string EmergencyGroup::getStatus() {
+void EmergencyGroup::reset()
+{
+	for (size_t i = 0; i < children.size(); i++)
+	{
+		children[i]->reset();
+	}
+}
+
+string EmergencyGroup::getStatus()
+{
 	ostringstream oss;
-	oss << "[Group: " << name << "] (" << children.size() << " children)\n";
-	for (size_t i = 0; i < children.size(); i++) {
-		oss << "  " << children[i]->getStatus() << "\n";
+	oss << "[Group: " << name << "] (" << children.size() << " children)";
+	for (size_t i = 0; i < children.size(); i++)
+	{
+		istringstream lines(children[i]->getStatus());
+		string line;
+		while (getline(lines, line))
+		{
+			oss << "\n  " << line;
+		}
 	}
 	return oss.str();
 }
