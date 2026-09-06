@@ -1,0 +1,181 @@
+==82== Memcheck, a memory error detector
+==82== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==82== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==82== Command: ./taskforge
+==82== 
+--- Incident 1: structural collapse, Church Street ---
+
+Call received. Resources assigned:
+[Group: Incident Command 1] (2 children)
+  [Group: Operations] (2 children)
+    [Group: Strike Team Alpha] (2 children)
+      [Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+      [Unit RescueUnit-2 "Rescue 1" (RescueUnit)] state=Standby load=0/4
+    [Unit PoliceUnit-3 "Unit 12" (PoliceUnit)] state=Standby load=0/2
+  [Group: Medical Branch] (2 children)
+    [Unit Ambulance-4 "Medic 3" (Ambulance)] state=Standby load=0/2
+    [Unit Ambulance-5 "Medic 5" (Ambulance)] state=Standby load=0/2
+
+Dispatching Strike Team Alpha and Unit 12.
+Units still available for other calls:
+  [Unit Ambulance-4 "Medic 3" (Ambulance)] state=Standby load=0/2
+  [Unit Ambulance-5 "Medic 5" (Ambulance)] state=Standby load=0/2
+
+Strike Team arrives on scene.
+FireEngine-1 deploying hose (water capacity 2000L)
+FireEngine-1 extinguishing fire (foam level now 90)
+RescueUnit-2 performing rescue (rope length 50m)
+RescueUnit-2 extricating casualty using cutting tools
+
+Survivors reported trapped. K9 team attached to Rescue 1.
+RescueUnit-2 performing rescue (rope length 50m)
+RescueUnit-2 extricating casualty using cutting tools
+  (K9 Rex) searching for survivors
+
+Medic 3 dispatched, then stood down when Medic 5 is closer.
+[Cancel] Ambulance-4 mission cancelled while En Route.
+Ambulance-5 treating patient (supplies left 90)
+Ambulance-5 transporting patient (capacity 2)
+
+Engine 7 completes its work and returns to the pool.
+[Invalid] FireEngine-1 is already Done; cannot advance further.
+[Reset] FireEngine-1 returned to the available units.
+
+Medic 5 is still on scene, Medic 3 is stood down.
+[Invalid] Ambulance-5 is On Scene;cancel it before resetting.
+[Reset] Ambulance-4 returned to the available units.
+
+End of incident 1:
+[Group: Incident Command 1] (2 children)
+  [Group: Operations] (2 children)
+    [Group: Strike Team Alpha] (2 children)
+      [Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+      [Unit RescueUnit-2 "Rescue 1" (RescueUnit)] state=On Scene load=0/4 +K9[Rex/German Shepherd]
+    [Unit PoliceUnit-3 "Unit 12" (PoliceUnit)] state=En Route load=0/2
+  [Group: Medical Branch] (2 children)
+    [Unit Ambulance-4 "Medic 3" (Ambulance)] state=Standby load=0/2
+    [Unit Ambulance-5 "Medic 5" (Ambulance)] state=On Scene load=0/2
+
+--- Incident 2: veld fire, Bronkhorstspruit road ---
+
+Initial deployment:
+[Group: Incident Command 2] (2 children)
+  [Group: Operations] (2 children)
+    [Group: Strike Team Bravo] (2 children)
+      [Unit FireEngine-6 "Engine 2" (FireEngine)] state=Standby load=0/4
+      [Unit FireEngine-7 "Engine 9" (FireEngine)] state=Standby load=0/4
+    [Unit PoliceUnit-8 "Unit 4" (PoliceUnit)] state=Standby load=0/2
+  [Group: Air Operations] (1 children)
+    [Unit RescueUnit-9 "Rescue 2" (RescueUnit)] state=Standby load=0/4 +TechRescue[hydraulic spreaders, rope kit] +Aerial[DJI-Matrice]
+
+Fire jumps the road. Unit 4 reassigned from Operations into Strike Team Bravo.
+Operations now has 1 child, Strike Team Bravo has 3.
+
+Strike Team Bravo iterator created before the move (snapshot):
+  [Unit FireEngine-6 "Engine 2" (FireEngine)] state=Standby load=0/4
+  [Unit FireEngine-7 "Engine 9" (FireEngine)] state=Standby load=0/4
+
+Strike Team Bravo iterator created after the move:
+  [Unit FireEngine-6 "Engine 2" (FireEngine)] state=Standby load=0/4
+  [Unit FireEngine-7 "Engine 9" (FireEngine)] state=Standby load=0/4
+  [Unit PoliceUnit-8 "Unit 4" (PoliceUnit)] state=Standby load=0/2
+
+All engines ordered to advance together.
+Fire engines:
+  [Unit FireEngine-6 "Engine 2" (FireEngine)] state=En Route load=0/4
+  [Unit FireEngine-7 "Engine 9" (FireEngine)] state=En Route load=0/4
+
+Air Operations conducts reconnaissance while ground crews work.
+RescueUnit-9 performing rescue (rope length 30m)
+RescueUnit-9 extricating casualty using cutting tools
+  (TechRescue) heavy extrication using hydraulic spreaders, rope kit
+  (Drone DJI-Matrice) conducting aerial reconnaissance
+
+Strike Team Bravo on scene and working.
+FireEngine-6 deploying hose (water capacity 3000L)
+FireEngine-6 extinguishing fire (foam level now 90)
+FireEngine-7 deploying hose (water capacity 2500L)
+FireEngine-7 extinguishing fire (foam level now 90)
+PoliceUnit-8 securing perimeter with 3 officers
+PoliceUnit-8 directing traffic
+
+Engine 9 is withdrawn to cover a second call.
+[Cancel] FireEngine-7 mission cancelled while On Scene.
+Units available for the second call:
+  [Unit FireEngine-7 "Engine 9" (FireEngine)] state=Done load=0/4
+
+End of incident 2:
+[Group: Incident Command 2] (2 children)
+  [Group: Operations] (1 children)
+    [Group: Strike Team Bravo] (3 children)
+      [Unit FireEngine-6 "Engine 2" (FireEngine)] state=On Scene load=0/4
+      [Unit FireEngine-7 "Engine 9" (FireEngine)] state=Done load=0/4
+      [Unit PoliceUnit-8 "Unit 4" (PoliceUnit)] state=En Route load=0/2
+  [Group: Air Operations] (1 children)
+    [Unit RescueUnit-9 "Rescue 2" (RescueUnit)] state=On Scene load=0/4 +TechRescue[hydraulic spreaders, rope kit] +Aerial[DJI-Matrice]
+Total capacity 14, current load 0
+
+==82== 
+==82== HEAP SUMMARY:
+==82==     in use at exit: 48 bytes in 6 blocks
+==82==   total heap usage: 262 allocs, 256 frees, 119,406 bytes allocated
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 1 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x112678: StandbyState::getInstance() (StandbyState.cpp:9)
+==82==    by 0x1102FF: EmergencyUnit::EmergencyUnit(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (EmergencyUnit.cpp:19)
+==82==    by 0x111292: FireEngine::FireEngine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (FireEngine.cpp:8)
+==82==    by 0x113F58: buildingCollapse(EmergencyGroup*) (main.cpp:32)
+==82==    by 0x1159EF: main (main.cpp:161)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 2 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x11101C: EnRouteState::getInstance() (EnRouteState.cpp:9)
+==82==    by 0x11275D: StandbyState::advance(EmergencyUnit*) (StandbyState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x10F3BC: EmergencyGroup::advance() (EmergencyGroup.cpp:53)
+==82==    by 0x1142C8: buildingCollapse(EmergencyGroup*) (main.cpp:51)
+==82==    by 0x1159EF: main (main.cpp:161)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 3 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x111BDA: OnSceneState::getInstance() (OnSceneState.cpp:9)
+==82==    by 0x111101: EnRouteState::advance(EmergencyUnit*) (EnRouteState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x10F3BC: EmergencyGroup::advance() (EmergencyGroup.cpp:53)
+==82==    by 0x11439D: buildingCollapse(EmergencyGroup*) (main.cpp:56)
+==82==    by 0x1159EF: main (main.cpp:161)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 4 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x10E9FE: DoneState::getInstance() (DoneState.cpp:11)
+==82==    by 0x1105CF: EmergencyUnit::execute() (EmergencyUnit.cpp:56)
+==82==    by 0x10F354: EmergencyGroup::execute() (EmergencyGroup.cpp:47)
+==82==    by 0x1143BA: buildingCollapse(EmergencyGroup*) (main.cpp:57)
+==82==    by 0x1159EF: main (main.cpp:161)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 5 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x112468: StabilizingState::getInstance() (StabilizingState.cpp:9)
+==82==    by 0x111CBF: OnSceneState::advance(EmergencyUnit*) (OnSceneState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x114577: buildingCollapse(EmergencyGroup*) (main.cpp:76)
+==82==    by 0x1159EF: main (main.cpp:161)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 6 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x112CBC: TransportingState::getInstance() (TransportingState.cpp:9)
+==82==    by 0x11254D: StabilizingState::advance(EmergencyUnit*) (StabilizingState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x11458E: buildingCollapse(EmergencyGroup*) (main.cpp:77)
+==82==    by 0x1159EF: main (main.cpp:161)
+==82== 
+==82== LEAK SUMMARY:
+==82==    definitely lost: 0 bytes in 0 blocks
+==82==    indirectly lost: 0 bytes in 0 blocks
+==82==      possibly lost: 0 bytes in 0 blocks
+==82==    still reachable: 48 bytes in 6 blocks
+==82==         suppressed: 0 bytes in 0 blocks
+==82== 
+==82== For lists of detected and suppressed errors, rerun with: -s
+==82== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

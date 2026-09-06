@@ -20,6 +20,7 @@ public:
 	void execute();
 	void advance();
 	void cancel();
+	void reset();
 	string getStatus();
 	int getCapacity();
 	int getCurrentLoad();

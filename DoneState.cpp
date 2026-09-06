@@ -1,5 +1,6 @@
 #include "DoneState.h"
 #include "EmergencyUnit.h"
+#include "StandbyState.h"
 #include <iostream>
 using namespace std;
 
@@ -24,4 +25,10 @@ bool DoneState::isAvailable() {
 void DoneState::advance(EmergencyUnit* u) {
 	// Invalid transition, handled sensibly: there is nothing after Done.
 	cout << "[Invalid] " << u->getUnitID() << " is already Done; cannot advance further." << endl;
+}
+
+void DoneState::reset(EmergencyUnit* u)
+{
+	cout <<"[Reset] "<<u->getUnitID() << " returned to the available units."<<endl;
+	u->setState(StandbyState::getInstance());
 }

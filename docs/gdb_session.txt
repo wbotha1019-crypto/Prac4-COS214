@@ -1,0 +1,40 @@
+Breakpoint 1, EmergencyGroup::getCapacity (this=0x5af0c9019850) at EmergencyGroup.cpp:88
+88              int total = 0;
+(gdb) bt
+#0  EmergencyGroup::getCapacity (this=0x5af0c9019850) at EmergencyGroup.cpp:88
+#1  0x00005af0a4fdb794 in EmergencyGroup::getCapacity (this=0x5af0c90192f0) at EmergencyGroup.cpp:90
+#2  0x00005af0a4fe1517 in wildfire (command=0x5af0c90192f0) at main.cpp:155
+#3  0x00005af0a4fe1a77 in main () at main.cpp:165
+(gdb) continue
+Continuing.
+
+Breakpoint 1, EmergencyGroup::getCapacity (this=0x5af0c9019790) at EmergencyGroup.cpp:88
+88              int total = 0;
+(gdb) bt
+#0  EmergencyGroup::getCapacity (this=0x5af0c9019790) at EmergencyGroup.cpp:88
+#1  0x00005af0a4fdb794 in EmergencyGroup::getCapacity (this=0x5af0c9019850) at EmergencyGroup.cpp:90
+#2  0x00005af0a4fdb794 in EmergencyGroup::getCapacity (this=0x5af0c90192f0) at EmergencyGroup.cpp:90
+#3  0x00005af0a4fe1517 in wildfire (command=0x5af0c90192f0) at main.cpp:155
+#4  0x00005af0a4fe1a77 in main () at main.cpp:165
+(gdb) continue
+Continuing.
+
+Breakpoint 1, EmergencyGroup::getCapacity (this=0x5af0c90197e0) at EmergencyGroup.cpp:88
+88              int total = 0;
+(gdb) bt
+#0  EmergencyGroup::getCapacity (this=0x5af0c90197e0) at EmergencyGroup.cpp:88
+#1  0x00005af0a4fdb794 in EmergencyGroup::getCapacity (this=0x5af0c90192f0) at EmergencyGroup.cpp:90
+#2  0x00005af0a4fe1517 in wildfire (command=0x5af0c90192f0) at main.cpp:155
+#3  0x00005af0a4fe1a77 in main () at main.cpp:165
+(gdb) print name
+$1 = "Air Operations"
+(gdb) finish
+Run till exit from #0  EmergencyGroup::getCapacity (this=0x5af0c90197e0) at EmergencyGroup.cpp:88
+0x00005af0a4fdb794 in EmergencyGroup::getCapacity (this=0x5af0c90192f0) at EmergencyGroup.cpp:90
+90                      total += children[i]->getCapacity();
+Value returned is $2 = 4
+(gdb) continue
+Continuing.
+Total capacity 14, current load 0
+
+[Inferior 1 (process 24) exited normally]

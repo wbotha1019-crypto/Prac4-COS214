@@ -3,12 +3,12 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "Aggregrate.h"
+#include "Aggregate.h"
 using namespace std;
 
 class EmergencyIterator;
 
-class EmergencyComponent : public Aggregrate {
+class EmergencyComponent : public Aggregate {
 protected:
 	string name;
 	int priority;
@@ -21,6 +21,7 @@ public:
 	virtual void execute() = 0;
 	virtual void advance() = 0;
 	virtual void cancel() = 0;
+	virtual void reset() = 0;
 	virtual string getStatus() = 0;
 	virtual int getCapacity() = 0;
 	virtual int getCurrentLoad() = 0;

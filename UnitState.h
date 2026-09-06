@@ -25,5 +25,8 @@ public:
 	// correct — I removed the redundant redeclarations from every concrete
 	// state class instead of pretending they did something.
 	virtual void cancel(EmergencyUnit* u);
+
+	// Only DoneState overrides this; every other state rejects reset.
+	virtual void reset(EmergencyUnit* u);
 };
 #endif

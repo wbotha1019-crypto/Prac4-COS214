@@ -1,6 +1,7 @@
 #include "EmergencyUnit.h"
 #include "UnitState.h"
 #include "StandbyState.h"
+#include "DoneState.h"
 #include "AllUnitsIterator.h"
 #include "AvailableUnitsIterator.h"
 #include "TypeFilterIterator.h"
@@ -52,10 +53,8 @@ void EmergencyUnit::execute() {
 	// Design decision (execute() "delegates to State"): a unit that has
 	// already finished its mission has nothing left to execute. Every other
 	// state is free to actually perform the domain action.
-	if (currentState == StandbyState::getInstance() && currentLoad == 0) {
-		// still fine to perform a standby check/readiness action
-	}
-	if (currentState->getStateName() == "Done") {
+	if (currentState == DoneState::getInstance())
+	{
 		cout << "[Execute] " << unitID << " is Done; no action taken." << endl;
 		return;
 	}
@@ -68,6 +67,15 @@ void EmergencyUnit::advance() {
 
 void EmergencyUnit::cancel() {
 	currentState->cancel(this);
+}
+
+void EmergencyUnit::reset()
+{
+	currentState->reset(this);
+	if (currentState == StandbyState::getInstance())
+	{
+		currentLoad = 0;
+	}
 }
 
 string EmergencyUnit::getStatus() {
