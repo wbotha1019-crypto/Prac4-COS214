@@ -1,0 +1,104 @@
+==82== Memcheck, a memory error detector
+==82== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==82== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==82== Command: ./taskforge
+==82== 
+[Group: Incident Command] (2 children)
+  [Group: Operations] (2 children)
+    [Group: Strike Team Alpha] (2 children)
+      [Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+      [Unit RescueUnit-4 "Rescue 1" (RescueUnit)] state=Standby load=0/4 +K9[Rex/German Shepherd]
+    [Unit PoliceUnit-3 "Unit 12" (PoliceUnit)] state=Standby load=0/2
+  [Unit Ambulance-2 "Medic 3" (Ambulance)] state=Standby load=0/2 +TechRescue[hydraulic spreaders, rope kit] +Aerial[DJI-Matrice]
+[Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+[Unit RescueUnit-4 "Rescue 1" (RescueUnit)] state=Standby load=0/4 +K9[Rex/German Shepherd]
+[Unit PoliceUnit-3 "Unit 12" (PoliceUnit)] state=Standby load=0/2
+[Unit Ambulance-2 "Medic 3" (Ambulance)] state=Standby load=0/2 +TechRescue[hydraulic spreaders, rope kit] +Aerial[DJI-Matrice]
+
+[Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+[Unit RescueUnit-4 "Rescue 1" (RescueUnit)] state=Standby load=0/4 +K9[Rex/German Shepherd]
+[Unit PoliceUnit-3 "Unit 12" (PoliceUnit)] state=Standby load=0/2
+[Unit Ambulance-2 "Medic 3" (Ambulance)] state=Standby load=0/2 +TechRescue[hydraulic spreaders, rope kit] +Aerial[DJI-Matrice]
+
+[Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+
+FireEngine-1 deploying hose (water capacity 2000L)
+FireEngine-1 extinguishing fire (foam level now 90)
+[Invalid] FireEngine-1 is already Done; cannot advance further.
+[Unit FireEngine-1 "Engine 7" (FireEngine)] state=Done load=0/4
+[Invalid] PoliceUnit-3 is Standby;cancel it before resetting.
+[Reset] FireEngine-1 returned to the available units.
+[Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+[Cancel] Ambulance-2 mission cancelled while En Route.
+[Unit Ambulance-2 "Medic 3" (Ambulance)] state=Done load=0/2
+
+RescueUnit-4 performing rescue (rope length 50m)
+RescueUnit-4 extricating casualty using cutting tools
+  (K9 Rex) searching for survivors
+[Execute] Ambulance-2 is Done; no action taken.
+  (TechRescue) heavy extrication using hydraulic spreaders, rope kit
+  (Drone DJI-Matrice) conducting aerial reconnaissance
+
+[Group: Incident Command] (2 children)
+  [Group: Operations] (1 children)
+    [Group: Strike Team Alpha] (3 children)
+      [Unit FireEngine-1 "Engine 7" (FireEngine)] state=Standby load=0/4
+      [Unit RescueUnit-4 "Rescue 1" (RescueUnit)] state=Standby load=0/4 +K9[Rex/German Shepherd]
+      [Unit PoliceUnit-3 "Unit 12" (PoliceUnit)] state=Standby load=0/2
+  [Unit Ambulance-2 "Medic 3" (Ambulance)] state=Done load=0/2 +TechRescue[hydraulic spreaders, rope kit] +Aerial[DJI-Matrice]
+Capacity: 12 Load: 0
+==82== 
+==82== HEAP SUMMARY:
+==82==     in use at exit: 48 bytes in 6 blocks
+==82==   total heap usage: 145 allocs, 139 frees, 101,840 bytes allocated
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 1 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x112678: StandbyState::getInstance() (StandbyState.cpp:9)
+==82==    by 0x1102FF: EmergencyUnit::EmergencyUnit(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) (EmergencyUnit.cpp:19)
+==82==    by 0x111292: FireEngine::FireEngine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (FireEngine.cpp:8)
+==82==    by 0x112E59: main (Testingmain.cpp:19)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 2 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x11101C: EnRouteState::getInstance() (EnRouteState.cpp:9)
+==82==    by 0x11275D: StandbyState::advance(EmergencyUnit*) (StandbyState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x113397: main (Testingmain.cpp:58)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 3 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x111BDA: OnSceneState::getInstance() (OnSceneState.cpp:9)
+==82==    by 0x111101: EnRouteState::advance(EmergencyUnit*) (EnRouteState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x1133B4: main (Testingmain.cpp:59)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 4 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x10E9FE: DoneState::getInstance() (DoneState.cpp:11)
+==82==    by 0x1105CF: EmergencyUnit::execute() (EmergencyUnit.cpp:56)
+==82==    by 0x1133D1: main (Testingmain.cpp:60)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 5 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x112468: StabilizingState::getInstance() (StabilizingState.cpp:9)
+==82==    by 0x111CBF: OnSceneState::advance(EmergencyUnit*) (OnSceneState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x1133EE: main (Testingmain.cpp:61)
+==82== 
+==82== 8 bytes in 1 blocks are still reachable in loss record 6 of 6
+==82==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==82==    by 0x113BB4: TransportingState::getInstance() (TransportingState.cpp:9)
+==82==    by 0x11254D: StabilizingState::advance(EmergencyUnit*) (StabilizingState.cpp:23)
+==82==    by 0x110685: EmergencyUnit::advance() (EmergencyUnit.cpp:65)
+==82==    by 0x11340B: main (Testingmain.cpp:62)
+==82== 
+==82== LEAK SUMMARY:
+==82==    definitely lost: 0 bytes in 0 blocks
+==82==    indirectly lost: 0 bytes in 0 blocks
+==82==      possibly lost: 0 bytes in 0 blocks
+==82==    still reachable: 48 bytes in 6 blocks
+==82==         suppressed: 0 bytes in 0 blocks
+==82== 
+==82== For lists of detected and suppressed errors, rerun with: -s
+==82== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
