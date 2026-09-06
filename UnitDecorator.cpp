@@ -30,6 +30,11 @@ void UnitDecorator::cancel() {
 	wrapped->cancel();
 }
 
+void UnitDecorator::reset()
+{
+	wrapped->reset();
+}
+
 string UnitDecorator::getStatus() {
 	return wrapped->getStatus();
 }

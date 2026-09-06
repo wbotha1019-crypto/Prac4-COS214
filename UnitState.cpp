@@ -14,3 +14,9 @@ void UnitState::cancel(EmergencyUnit* u) {
 	cout << "[Cancel] " << u->getUnitID() << " mission cancelled while " << getStateName() << "." << endl;
 	u->setState(DoneState::getInstance());
 }
+
+void UnitState::reset(EmergencyUnit* u)
+{
+	// Invalid: unit is still on a mission.
+	cout <<"[Invalid] " << u->getUnitID() << " is " << getStateName() <<";cancel it before resetting."<< endl;
+}

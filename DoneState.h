@@ -17,5 +17,6 @@ public:
 	string getStateName();
 	bool isAvailable();
 	void advance(EmergencyUnit* u);
+	void reset(EmergencyUnit* u);
 };
 #endif
