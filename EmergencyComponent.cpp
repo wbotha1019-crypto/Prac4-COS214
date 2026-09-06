@@ -1,26 +1,22 @@
 #include "EmergencyComponent.h"
 
-EmergencyComponent::EmergencyComponent(string name, int priority) {
-	// TODO - implement EmergencyComponent::EmergencyComponent
-	throw "Not yet implemented";
+EmergencyComponent::EmergencyComponent(string name, int priority)
+	: name(name), priority(priority) {
 }
 
-EmergencyComponent::EmergencyComponent() {
-	// TODO - implement EmergencyComponent::EmergencyComponent
-	throw "Not yet implemented";
+EmergencyComponent::~EmergencyComponent() {
+	// Nothing owned directly at this level; derived classes own their own data
+	// (EmergencyGroup owns children, UnitDecorator owns wrapped).
 }
 
 string EmergencyComponent::getName() {
-	// TODO - implement EmergencyComponent::getName
-	throw "Not yet implemented";
+	return name;
 }
 
 int EmergencyComponent::getPriority() {
-	// TODO - implement EmergencyComponent::getPriority
-	throw "Not yet implemented";
+	return priority;
 }
 
 void EmergencyComponent::setPriority(int p) {
-	// TODO - implement EmergencyComponent::setPriority
-	throw "Not yet implemented";
+	priority = p;
 }
