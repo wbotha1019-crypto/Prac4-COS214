@@ -1,61 +1,71 @@
 #include "UnitDecorator.h"
 
-UnitDecorator::UnitDecorator(EmergencyComponent* c) {
-	// TODO - implement UnitDecorator::UnitDecorator
-	throw "Not yet implemented";
+UnitDecorator::UnitDecorator(EmergencyComponent* c)
+	: EmergencyComponent(c ? c->getName() : "", c ? c->getPriority() : 0),
+	  wrapped(c) {
 }
 
-UnitDecorator::UnitDecorator() {
-	// TODO - implement UnitDecorator::UnitDecorator
-	throw "Not yet implemented";
+UnitDecorator::~UnitDecorator() {
+	// Ownership rule (Task 1, Decision 5): a decorator owns the component it
+	// wraps and deletes it. If you stack decorators (K9Decorator wrapping an
+	// AerialDecorator wrapping an Ambulance, say), each destructor deletes the
+	// next one in, so the whole stack unwinds cleanly with a single `delete`
+	// on the outermost decorator.
+	delete wrapped;
 }
 
 string UnitDecorator::getName() {
-	// TODO - implement UnitDecorator::getName
-	throw "Not yet implemented";
+	return wrapped->getName();
 }
 
 void UnitDecorator::execute() {
-	// TODO - implement UnitDecorator::execute
-	throw "Not yet implemented";
+	wrapped->execute();
 }
 
 void UnitDecorator::advance() {
-	// TODO - implement UnitDecorator::advance
-	throw "Not yet implemented";
+	wrapped->advance();
 }
 
 void UnitDecorator::cancel() {
-	// TODO - implement UnitDecorator::cancel
-	throw "Not yet implemented";
+	wrapped->cancel();
 }
 
 string UnitDecorator::getStatus() {
-	// TODO - implement UnitDecorator::getStatus
-	throw "Not yet implemented";
+	return wrapped->getStatus();
 }
 
 int UnitDecorator::getCapacity() {
-	// TODO - implement UnitDecorator::getCapacity
-	throw "Not yet implemented";
+	return wrapped->getCapacity();
 }
 
 int UnitDecorator::getCurrentLoad() {
-	// TODO - implement UnitDecorator::getCurrentLoad
-	throw "Not yet implemented";
+	return wrapped->getCurrentLoad();
 }
 
 EmergencyIterator* UnitDecorator::createAllIterator() {
-	// TODO - implement UnitDecorator::createAllIterator
-	throw "Not yet implemented";
+	return wrapped->createAllIterator();
 }
 
 EmergencyIterator* UnitDecorator::createAvailableIterator() {
-	// TODO - implement UnitDecorator::createAvailableIterator
-	throw "Not yet implemented";
+	return wrapped->createAvailableIterator();
 }
 
 EmergencyIterator* UnitDecorator::createTypeFilterIterator(string unitType) {
-	// TODO - implement UnitDecorator::createTypeFilterIterator
-	throw "Not yet implemented";
+	return wrapped->createTypeFilterIterator(unitType);
+}
+
+bool UnitDecorator::isAvailable() {
+	return wrapped->isAvailable();
+}
+
+string UnitDecorator::getUnitType() {
+	return wrapped->getUnitType();
+}
+
+void UnitDecorator::populate(vector<EmergencyComponent*>& list) {
+	// A decorated component is treated as a single discoverable "unit-like"
+	// item during traversal — it adds ITSELF (not the raw wrapped object), so
+	// that calling execute()/getStatus() on the iterator's result still gets
+	// the decorated behaviour, not the plain undecorated one.
+	list.push_back(this);
 }
