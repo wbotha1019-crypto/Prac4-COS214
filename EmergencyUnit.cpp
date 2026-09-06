@@ -1,76 +1,102 @@
 #include "EmergencyUnit.h"
+#include "UnitState.h"
+#include "StandbyState.h"
+#include "AllUnitsIterator.h"
+#include "AvailableUnitsIterator.h"
+#include "TypeFilterIterator.h"
+#include <sstream>
+#include <iostream>
+using namespace std;
 
-EmergencyUnit::EmergencyUnit(string name, string unitType, int capacity) {
-	// TODO - implement EmergencyUnit::EmergencyUnit
-	throw "Not yet implemented";
+static int nextUnitSerial = 1;
+
+EmergencyUnit::EmergencyUnit(string name, string unitType, int capacity)
+	: EmergencyComponent(name, 0),
+	  unitType(unitType),
+	  capacity(capacity),
+	  currentLoad(0),
+	  currentState(StandbyState::getInstance()) {
+	ostringstream oss;
+	oss << unitType << "-" << nextUnitSerial++;
+	unitID = oss.str();
+}
+
+EmergencyUnit::~EmergencyUnit() {
+	// Ownership rule (Task 1, Decision 5): currentState points at a shared
+	// singleton owned by no one in particular (its process-lifetime instance
+	// lives until program exit). We must NOT delete it here.
 }
 
 void EmergencyUnit::setState(UnitState* s) {
-	// TODO - implement EmergencyUnit::setState
-	throw "Not yet implemented";
+	if (s == nullptr) return;
+	currentState = s;
 }
 
 UnitState* EmergencyUnit::getState() {
-	// TODO - implement EmergencyUnit::getState
-	throw "Not yet implemented";
+	return currentState;
 }
 
 string EmergencyUnit::getUnitType() {
-	// TODO - implement EmergencyUnit::getUnitType
-	throw "Not yet implemented";
+	return unitType;
 }
 
 string EmergencyUnit::getUnitID() {
-	// TODO - implement EmergencyUnit::getUnitID
-	throw "Not yet implemented";
+	return unitID;
 }
 
 bool EmergencyUnit::isAvailable() {
-	// TODO - implement EmergencyUnit::isAvailable
-	throw "Not yet implemented";
+	return currentState->isAvailable();
 }
 
 void EmergencyUnit::execute() {
-	// TODO - implement EmergencyUnit::execute
-	throw "Not yet implemented";
+	// Design decision (execute() "delegates to State"): a unit that has
+	// already finished its mission has nothing left to execute. Every other
+	// state is free to actually perform the domain action.
+	if (currentState == StandbyState::getInstance() && currentLoad == 0) {
+		// still fine to perform a standby check/readiness action
+	}
+	if (currentState->getStateName() == "Done") {
+		cout << "[Execute] " << unitID << " is Done; no action taken." << endl;
+		return;
+	}
+	performAction();
 }
 
 void EmergencyUnit::advance() {
-	// TODO - implement EmergencyUnit::advance
-	throw "Not yet implemented";
+	currentState->advance(this);
 }
 
 void EmergencyUnit::cancel() {
-	// TODO - implement EmergencyUnit::cancel
-	throw "Not yet implemented";
+	currentState->cancel(this);
 }
 
 string EmergencyUnit::getStatus() {
-	// TODO - implement EmergencyUnit::getStatus
-	throw "Not yet implemented";
+	ostringstream oss;
+	oss << "[Unit " << unitID << " \"" << name << "\" (" << unitType << ")] state="
+	    << currentState->getStateName() << " load=" << currentLoad << "/" << capacity;
+	return oss.str();
 }
 
 int EmergencyUnit::getCapacity() {
-	// TODO - implement EmergencyUnit::getCapacity
-	throw "Not yet implemented";
+	return capacity;
 }
 
 int EmergencyUnit::getCurrentLoad() {
-	// TODO - implement EmergencyUnit::getCurrentLoad
-	throw "Not yet implemented";
+	return currentLoad;
 }
 
 EmergencyIterator* EmergencyUnit::createAllIterator() {
-	// TODO - implement EmergencyUnit::createAllIterator
-	throw "Not yet implemented";
+	return new AllUnitsIterator(this);
 }
 
 EmergencyIterator* EmergencyUnit::createAvailableIterator() {
-	// TODO - implement EmergencyUnit::createAvailableIterator
-	throw "Not yet implemented";
+	return new AvailableUnitsIterator(this);
 }
 
 EmergencyIterator* EmergencyUnit::createTypeFilterIterator(string unitType) {
-	// TODO - implement EmergencyUnit::createTypeFilterIterator
-	throw "Not yet implemented";
+	return new TypeFilterIterator(this, unitType);
+}
+
+void EmergencyUnit::populate(vector<EmergencyComponent*>& list) {
+	list.push_back(this);
 }
